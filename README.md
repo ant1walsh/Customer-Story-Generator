@@ -11,7 +11,7 @@ This workflow was developed with **N8N** as the agent orchestrator and the multi
 * **Dynamic Privacy Logic:** Designate privacy permission preferences to protect confidential and personally identifiable information.
 * **Case Study Generator:** Develop case studies that are performance-driven, technically accurate, and verified by customer testimonials using the **Gemini 3 Flash** model.
 * **Social Media Generator:** Generate social media posts with clear, concise copy for **X** and descriptive, results-oriented **LinkedIn** posts using the **Gemini 3 Flash** model.
-* **Human-in-the-Loop:** Sends  text as **Markdown (.md)** files to your inbox -- which can be accessed, edited, downloaded and exported.
+* **Human-in-the-Loop:** Sends text as **Markdown (.md)** files to your inbox -- which can be accessed, edited, downloaded and exported.
 
 ---
 
@@ -27,7 +27,7 @@ This workflow was developed with **N8N** as the agent orchestrator and the multi
 
 ## Technical Specifications
 * **Platform:** n8n
-* **LLM:** `gemini-3.1-pro-previeww`
+* **LLM:** `gemini-3.1-pro-preview`
 * **Input Format:** `.mp4`
 * **Output Format:** Markdown (`.md`)
 * **Integrations:** Google Gemini (PaLM) API, Gmail OAuth2 
