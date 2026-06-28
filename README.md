@@ -1,6 +1,6 @@
 # Customer Story Generator
 
-The **Customer Story Generator** is a content marketing engine that automatically generates customer case studies and social media posts for **LinkedIn** and **X**. Simply upload a recorded user interview and state your customers' privacy permissions, then the content will be sent to your inbox as Markdown files, which can be opened as Google Docs. 
+The **Customer Story Generator** is a content marketing pipeline that automatically generates customer case studies and social media posts for **LinkedIn** and **X**. Simply upload a recorded user interview and state your customers' privacy permissions, then the content will be sent to your inbox as Markdown files, which can be opened as Google Docs. 
 
 This workflow was developed with **N8N** as the agent orchestrator and the multimodal **Google Gemini 3 & 3.1 Pro** LLM with **Gmail** enabled for tool use. It's also capable of respecting privacy permissions and anonymizing personally identifiable information.
 
