@@ -1,6 +1,6 @@
 # Customer Story Generator
 
-The **Customer Story Generator** is a content-marketing pipeline that turns a recorded customer interview or testimonial into a publication-ready B2B case study and matching social posts for **LinkedIn** and **X**. Upload an `.mp4`, declare your customer's privacy permissions, and the finished assets arrive in your inbox as Markdown files (openable as Google Docs). Built on **n8n**, the latest **Gemini Pro** and **Gemini Flash** models, and **Gmail**, it respects privacy permissions and anonymizes personally identifiable information.
+The **Customer Story Generator** is a content marketing automation that converts recorded customer interviews or testimonials into a publication-ready B2B case studies and social posts for **LinkedIn** and **X**. Upload an `.mp4`, declare your customer's privacy permissions, and the finished assets arrive in your inbox as Markdown files that can be opened as Google Docs. Built on **n8n**, the latest **Gemini Pro** and **Gemini Flash** models, and **Gmail**, it respects privacy permissions and anonymizes personally identifiable information.
 
 ---
 
