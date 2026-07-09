@@ -1,0 +1,368 @@
+{
+  "name": "Customer Story Generator",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "Upload video",
+        "formDescription": "Upload a recording of a customer interview or testimonial to generate a case study and social media posts",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Upload MP4 file",
+              "fieldType": "file",
+              "multipleFiles": false,
+              "acceptFileTypes": ".mp4",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Do you have permission to reference the customer's organization?",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Yes"
+                  },
+                  {
+                    "option": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "fieldLabel": "Do you have permission to reference the user's first and last name?",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Yes"
+                  },
+                  {
+                    "option": "No"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "responseMode": "lastNode",
+        "options": {
+          "customCss": ":root {\n\t--font-family: 'Open Sans', sans-serif;\n\t--font-weight-normal: 400;\n\t--font-weight-bold: 600;\n\t--font-size-body: 12px;\n\t--font-size-label: 14px;\n\t--font-size-test-notice: 12px;\n\t--font-size-input: 14px;\n\t--font-size-header: 20px;\n\t--font-size-paragraph: 14px;\n\t--font-size-link: 12px;\n\t--font-size-error: 12px;\n\t--font-size-html-h1: 28px;\n\t--font-size-html-h2: 20px;\n\t--font-size-html-h3: 16px;\n\t--font-size-html-h4: 14px;\n\t--font-size-html-h5: 12px;\n\t--font-size-html-h6: 10px;\n\t--font-size-subheader: 14px;\n\n\t/* Colors */\n\t--color-background: #fbfcfe;\n\t--color-test-notice-text: #e6a23d;\n\t--color-test-notice-bg: #fefaf6;\n\t--color-test-notice-border: #f6dcb7;\n\t--color-card-bg: #ffffff;\n\t--color-card-border: #dbdfe7;\n\t--color-card-shadow: rgba(99, 77, 255, 0.06);\n\t--color-link: #7e8186;\n\t--color-header: #525356;\n\t--color-label: #555555;\n\t--color-input-border: #dbdfe7;\n\t--color-input-text: #71747A;\n\t--color-focus-border: rgb(90, 76, 194);\n\t--color-submit-btn-bg: #ff6d5a;\n\t--color-submit-btn-text: #ffffff;\n\t--color-error: #ea1f30;\n\t--color-required: #ff6d5a;\n\t--color-clear-button-bg: #7e8186;\n\t--color-html-text: #555;\n\t--color-html-link: #ff6d5a;\n\t--color-header-subtext: #7e8186;\n\n\t/* Border Radii */\n\t--border-radius-card: 8px;\n\t--border-radius-input: 6px;\n\t--border-radius-clear-btn: 50%;\n\t--card-border-radius: 8px;\n\n\t/* Spacing */\n\t--padding-container-top: 24px;\n\t--padding-card: 24px;\n\t--padding-test-notice-vertical: 12px;\n\t--padding-test-notice-horizontal: 24px;\n\t--margin-bottom-card: 16px;\n\t--padding-form-input: 12px;\n\t--card-padding: 24px;\n\t--card-margin-bottom: 16px;\n\n\t/* Dimensions */\n\t--container-width: 448px;\n\t--submit-btn-height: 48px;\n\t--checkbox-size: 18px;\n\n\t/* Others */\n\t--box-shadow-card: 0px 4px 16px 0px var(--color-card-shadow);\n\t--opacity-placeholder: 0.5;\n}"
+        }
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.3,
+      "position": [
+        3344,
+        1536
+      ],
+      "id": "5ce6e29a-938d-4217-bf2d-80d0acf8e502",
+      "name": "Upload recording1",
+      "webhookId": "dce0d019-c6b6-477b-b9cc-5a0a2b4fd151"
+    },
+    {
+      "parameters": {
+        "operation": "toText",
+        "sourceProperty": "text",
+        "binaryPropertyName": "=case_study",
+        "options": {
+          "fileName": "case_study.md"
+        }
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        3968,
+        1536
+      ],
+      "id": "bc8694ad-0a56-4266-a966-2953c8a2c88d",
+      "name": "Convert to File1"
+    },
+    {
+      "parameters": {
+        "sendTo": "your-email@example.com",
+        "subject": "Case study",
+        "message": "=Please review the attachment, which contains a case study generated based on customer interviews and recordings.",
+        "options": {
+          "attachmentsUi": {
+            "attachmentsBinary": [
+              {
+                "property": "case_study"
+              }
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        4112,
+        1536
+      ],
+      "id": "c9f60000-a1ed-496a-baa0-e35729db36a8",
+      "name": "Review case study1",
+      "webhookId": "41830b00-ee94-4ec7-94f3-bee89d461233",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "YOUR_GMAIL_CREDENTIAL_ID",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "toText",
+        "sourceProperty": "text",
+        "binaryPropertyName": "=social_posts",
+        "options": {
+          "fileName": "social_posts.md"
+        }
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        4528,
+        1536
+      ],
+      "id": "14b0f8b2-a7ff-45eb-a521-5d1ad8b53213",
+      "name": "Convert to File*1"
+    },
+    {
+      "parameters": {
+        "sendTo": "your-email@example.com",
+        "subject": "Social posts",
+        "message": "=Please review the attachment, which contains social media posts generated from customer interviews and recordings.",
+        "options": {
+          "attachmentsUi": {
+            "attachmentsBinary": [
+              {
+                "property": "social_posts"
+              }
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        4688,
+        1536
+      ],
+      "id": "847bd6cb-cd99-4d7b-a49e-7f4102f1a341",
+      "name": "Review social post1",
+      "webhookId": "7e67ebc3-e91b-4d9b-a726-f64869065429",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "YOUR_GMAIL_CREDENTIAL_ID",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are a Content Marketing Strategist who drafts case studies for B2B SaaS products. Your goal is to analyze the transcript of a customer interview or testimonial, and generate a case study between 900 and 1,200 words.\n\nHere is the transcript of the customer interview or testimonial: {{ $json.content.parts[0].text }}.\n\nAdhere to industry-standard best practices, and comply with the following instructions. Do NOT invent, assume, or \"fill in\" missing details.\n\n# PRIVACY PERMISSION REQUIREMENTS\n## User naming:\n- Do NOT mention your customer's users by name if {{ $(\"Upload recording1\").item.json[\"Do you have permission to reference the user's first and last name?\"] === \"No\" }}.\n  - Instead, refer to them by job title (i.e., “the CEO,” “the Head of RevOps,” “a Customer Success Manager”).\n  - The names of your customer's users may be used explicitly if {{ $(\"Upload recording1\").item.json[\"Do you have permission to reference the user's first and last name?\"] === \"Yes\" }}\n## Name of customer's organization\n- Do NOT mention your customer's organization by name if {{ $(\"Upload recording1\").item.json[\"Do you have permission to reference the customer's organization?\"] === \"No\" }}. \n  - Instead, refer to your customer's organization by industry, vertical, and scale (e.g., “an oil and gas company,” “a mid-market logistics provider,” “a healthcare software company”) or other labels (i.e., Fortune 500, 1000, 2000; Inc500; Y-Combinator alumni, etc.)\n  - The names of your customer's organization may be used explicitly if {{ $(\"Upload recording1\").item.json[\"Do you have permission to reference the customer's organization?\"] === \"Yes\" }}.\n- Feel free to use the name of the vendor as necessary.\n\n# CONTENT REQUIREMENTS\n- Write in a clear, credible, and consultative tone, favoring the voice of the customer rather than self-promotional language.\n- Maintain the precision of technical specifications without oversimplifying or overcomplicating concepts.\n- Produce verifiable claims evidenced by customer testimonies. Emphasize time and cost savings, productivity and efficiency gains, ROI achieved, or results delivered. \n- Ensure that quantitative results are relative to the status quo (quoted as percent gains/losses, factorial increases/decreases, etc.) and bound to a time range, whenever possible.\n- If no metrics exist, report qualitative outcomes and positive testimonies or experiences.\n- \n- Use direct quotes or near-direct quotes when possible and contextually relevant. Ensure that these quotes are phrased in the first-person point of view. Quotes must be attributed to the correct speaker based on the transcript labels.\n- Use creative headers and subheaders specific to content in each section rather than generic headers (i.e. \"Summary\", \"Context\", \"Challenge\", \"Discovery & Evaluation\", \"Customer Proofpoints\", \"Next Steps\").\n- Use a title that highlights how the company delivered measurable ROI with the product (i.e., \"How [the organization] delivered [ROI] using [the product]\").\n\n# OUTPUT FORMAT (suggested)\n1) Summary\n- Introduce the customer (while respecting privacy permissions), their key challenge and what changed, along with their results in 3-4 sentences.\n\n2) Context\n- Introduce the company (or describe it by industry and labels, if anonymized) and explain what the company does.\n- Describe the user’s role, including day-to-day responsibilities and objectives, based on the customer interview or transcript.\n\n3) Challenge\n- Describe the prior status quo, including workflow, process, or alternative tools used (i.e. competing products, custom-built solutions, outsourced services, or manual workarounds). \n- Explain any challenges the user faced in their role, and note its business impact (i.e. time, cost, risk, customer experience, revenue, reliability, morale, etc.)\n\n4) Discovery & Evaluation\n- Explain how they discovered the current product (i.e. channels, referral, search, etc.)\n- Describe the product, how it benefits the user, and how it's superior to other alternatives, along with any specific differentiators observed.\n\n5) Customer Proofpoints\n- List 3-5 resulting outcomes as bullet points. Include ROI or performance gains, if mentioned explicitly; otherwise, reference qualitative outcomes.\n- Include short, direct quotes from the transcript, if available and clearly attributable, while respecting privacy preferences.\n\n6) Next Steps\n- Include expansion plans, next steps, or future use cases only if found in the transcript.\n- Conclude with a call-to-action instructing readers how to utilize the product referenced.\n\n# VERIFY REQUIREMENTS\n- If organizations or users do not give explicit permission to use their name, do not include any names or proper nouns that identify the specific entity or individual.\n- Do not fabricate any information - especially testimonials, descriptions of processes, products, metrics, timelines, and results.\n- Return only the case study text (no meta-commentary).",
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.8,
+      "position": [
+        3696,
+        1536
+      ],
+      "id": "11a316d9-4162-4a42-9587-f6dc13ebbc9b",
+      "name": "Basic LLM Chain"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are a Content Marketing Strategist who specializes in translating customer stories into viral social media posts. Your goal is to generate two sets of copy, one for each channel: X (formerly Twitter) and LinkedIn, based on the transcript of a customer interview or testimonial.\n\nHere is the transcript for the customer interview or testimonial: {{ $('Transcribe a recording').item.json.content.parts[0].text }}\n\n# X post\n- Draft punchy and concise messaging that highlights the most significant results delivered for the customer. \n- Ensure that the content limit is no more than 260 characters. \n- Add a placeholder for the link to the recorded customer interview or testimonial.\n- Optional: include one or two contextually relevant hashtags.\n\n# LinkedIn post\n- Ensure that the content ranges between 150 and 250 words but does not exceed 1,500 characters. \n- Elaborate on technical specifications, product differentiators, benefits and outcomes that are unique to the customer's story. \n- Consolidate the most impactful statements within the first 200 characters, and disperse line breaks throughout the LinkedIn post to enhance readability. \n- Use direct quotes from customers, phrased in the first-person point of view, to highlight any significant claims. \n- Conclude the post with 3-5 of the most relevant hashtags.\n\nApply these instructions to posts for both X and LinkedIn:\n\n# PRIVACY PERMISSION REQUIREMENTS\n## User naming:\n- Do NOT mention your customer's users by name if {{ $(\"Upload recording1\").item.json[\"Do you have permission to reference the user's first and last name?\"] === \"No\" }}.\n  - Instead, refer to them by job title (i.e., “the CEO,” “the Head of RevOps,” “a Customer Success Manager”).\n  - The names of your customer's users may be used explicitly if {{ $(\"Upload recording1\").item.json[\"Do you have permission to reference the user's first and last name?\"] === \"Yes\" }}\n## Name of customer's organization\n- Do NOT mention your customer's organization by name if {{ $(\"Upload recording1\").item.json[\"Do you have permission to reference the customer's organization?\"] === \"No\" }}.\n  - Instead, refer to your customer's organization by industry, vertical, and scale (e.g., “an oil and gas company,” “a mid-market logistics provider,” “a healthcare software company”) or other labels (i.e., Fortune 500, 1000, 2000; Inc500; Y-Combinator alumni, etc.)\n  - The names of your customer's organization may be used explicitly if {{ $(\"Upload recording1\").item.json[\"Do you have permission to reference the customer's organization?\"] === \"Yes\" }}.\n- Feel free to use the name of the vendor as necessary.\n\n# CONTENT REQUIREMENTS\n- Do NOT invent, assume, or \"fill in\" missing details. Reference information from the transcript.\n- Adhere to best practices for social media posts about B2B SaaS products.\n- Ensure that the content is written to appeal to an audience similar to the customer.\n- Use a human-centric tone. Be witty and humorous when appropriate and professional when necessary. \n- Maintain the precision of technical specifications without sounding too simple or complex.\n- Incorporate emojis that correspond to text tastefully for introductions, headers, conclusions, bulleted points, hyperlinks, and CTAs.\n- Avoid cliches and any stereotypical indicators of AI-generated content, such as 'em-dashes'.\n- Commonly used acronyms and relevant technical vocabulary are permitted, but do not use unnecessary buzzwords or jargon.\n\n# FORMATTING REQUIREMENTS\n- Distinguish between X and LinkedIn posts with clear headers.\n- Start each post with a hook (which may include but is not limited to addressing a common pain-point; asking a thought-provoking question; announcing a major milestone; referencing recent findings, trends, or events when relevant; and more).\n- Add a placeholder for a short link to the recorded customer interview or testimonials.\n- Conclude with a single clear call-to-action (CTA), directing followers to view the content.",
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.8,
+      "position": [
+        4256,
+        1536
+      ],
+      "id": "8032c4bc-deba-4739-ac29-cddc2dd1894a",
+      "name": "Basic LLM Chain1"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-flash-latest",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        3696,
+        1664
+      ],
+      "id": "087c460f-0c60-4dd8-80df-9a19c7461575",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "YOUR_GOOGLE_GEMINI_CREDENTIAL_ID",
+          "name": "Google Gemini API account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-flash-latest",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        4256,
+        1680
+      ],
+      "id": "8ef3a151-7eda-4a69-8a08-55ed639c9700",
+      "name": "Google Gemini Chat Model1",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "YOUR_GOOGLE_GEMINI_CREDENTIAL_ID",
+          "name": "Google Gemini API account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "audio",
+        "modelId": {
+          "__rl": true,
+          "value": "models/gemini-pro-latest",
+          "mode": "list",
+          "cachedResultName": "models/gemini-pro-latest"
+        },
+        "inputType": "binary",
+        "binaryPropertyName": "Upload_MP4_file",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1,
+      "position": [
+        3520,
+        1536
+      ],
+      "id": "f19022a1-ad76-4c34-ab58-1435dc81b80d",
+      "name": "Transcribe a recording",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "YOUR_GOOGLE_GEMINI_CREDENTIAL_ID",
+          "name": "Google Gemini API account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Upload recording1": {
+      "main": [
+        [
+          {
+            "node": "Transcribe a recording",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert to File1": {
+      "main": [
+        [
+          {
+            "node": "Review case study1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert to File*1": {
+      "main": [
+        [
+          {
+            "node": "Review social post1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Basic LLM Chain": {
+      "main": [
+        [
+          {
+            "node": "Convert to File1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Basic LLM Chain1": {
+      "main": [
+        [
+          {
+            "node": "Convert to File*1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Basic LLM Chain1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Transcribe a recording": {
+      "main": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Basic LLM Chain1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "timeSavedMode": "fixed",
+    "callerPolicy": "workflowsFromSameOwner",
+    "availableInMCP": false
+  },
+  "meta": {
+    "templateCredsSetupCompleted": false
+  },
+  "nodeGroups": [],
+  "tags": []
+}
